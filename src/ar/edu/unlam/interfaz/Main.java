@@ -42,10 +42,6 @@ public class Main {
 				System.out.println((opcion.ordinal() + 1) + ". " + opcion);
 			}
 			
-//			for (MenuPrincipal opcion : MenuPrincipal.values()) {
-//				System.out.println((opcion.ordinal() + 1) + ". " + opcion);
-//			}
-			
 			System.out.println("");
 
 			System.out.print("Que opciones queres seleccionar?:  ");
