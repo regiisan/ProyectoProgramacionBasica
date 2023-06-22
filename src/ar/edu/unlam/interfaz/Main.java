@@ -36,14 +36,11 @@ public class Main {
 		while (!opcionValida) {
 			System.out.println("Menú Principal:");
 			System.out.println("");
-			
-			for (int i=0; i< MenuPrincipal.values().length; i++) {
-				MenuPrincipal opcion = MenuPrincipal.values()[i];
+			for (MenuPrincipal opcion : MenuPrincipal.values()) {
 				System.out.println((opcion.ordinal() + 1) + ". " + opcion);
 			}
-			
 			System.out.println("");
-
+			
 			System.out.print("Que opciones queres seleccionar?:  ");
 			char op1 = teclado.next().charAt(0);
 			// int opcionSeleccionada = teclado.nextInt();
