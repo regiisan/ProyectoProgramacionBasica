@@ -5,6 +5,7 @@ import java.util.Scanner;
 import ar.edu.unlam.dominio.MenuEleccionClase;
 import ar.edu.unlam.dominio.MenuPrincipal;
 import ar.edu.unlam.dominio.Personaje;
+import ar.edu.unlam.dominio.MenuPelea;
 
 public class Main {
 	public static void main(String[] args) {
@@ -36,11 +37,18 @@ public class Main {
 		while (!opcionValida) {
 			System.out.println("Menú Principal:");
 			System.out.println("");
-			for (MenuPrincipal opcion : MenuPrincipal.values()) {
+
+//			for (MenuPrincipal opcion : MenuPrincipal.values()) {
+//				System.out.println((opcion.ordinal() + 1) + ". " + opcion);
+//			}
+
+			for (int i = 0; i < MenuPrincipal.values().length; i++) {
+				MenuPrincipal opcion = MenuPrincipal.values()[i];
 				System.out.println((opcion.ordinal() + 1) + ". " + opcion);
 			}
+
 			System.out.println("");
-			
+
 			System.out.print("Que opciones queres seleccionar?:  ");
 			char op1 = teclado.next().charAt(0);
 			// int opcionSeleccionada = teclado.nextInt();
@@ -55,6 +63,7 @@ public class Main {
 				if (opcion == MenuPrincipal.PELEA) {
 					menuDeDificultad();
 					menuDeClase();
+					procesoMenuPelea(teclado);
 					// menuDeCompras()
 
 				}
@@ -85,16 +94,22 @@ public class Main {
 			case '1':
 				System.out.println("Usted eligio la dificultad Facil");
 				// crear objeto con parametros bajos
+				Personaje rival1 = new Personaje(1000, 100);
+
 				validarDificultad = true;
 				break;
 			case '2':
 				System.out.println("Usted eligio la dificultar Normal");
 				// crear objeto con parametros medios
+				Personaje rival2 = new Personaje(1500, 150);
+
 				validarDificultad = true;
 				break;
 			case '3':
 				System.out.println("Usted eligio la mayor dificultad, suerte con eso");
 				// crear objeto con parametros altos
+				Personaje rival3 = new Personaje(2500, 200);
+
 				validarDificultad = true;
 				break;
 			default:
@@ -112,8 +127,13 @@ public class Main {
 			System.out.println("ELIJA LA CLASE:");
 			System.out.println("");
 
-			for (MenuEleccionClase opcion2 : MenuEleccionClase.values()) {
-				System.out.println((opcion2.ordinal() + 1) + "-" + opcion2);
+//			for (MenuEleccionClase opcion2 : MenuEleccionClase.values()) {
+//				System.out.println((opcion2.ordinal() + 1) + "-" + opcion2);
+//			}
+
+			for (int i = 0; i < MenuEleccionClase.values().length; i++) {
+				MenuEleccionClase opcion2 = MenuEleccionClase.values()[i];
+				System.out.println((opcion2.ordinal() + 1) + ". " + opcion2);
 			}
 
 			System.out.println("Que clase deseas seleccionar? :");
@@ -130,7 +150,55 @@ public class Main {
 
 			} else
 				System.out.println("Por favor ingrese una opcion valida");
+		}
+	}
+	
+	private static void procesoMenuPelea(Scanner teclado) {
+		MenuPelea opcionMenuPelea;
+		
+		do {
+			mostrarMenuPelea();
+			
+			opcionMenuPelea = ingresarOpcion(teclado);
+			
+			switch(opcionMenuPelea) {
+			case ATACAR:
+				System.out.println("");
+				break;
+			case DEFENDER:
+				System.out.println("");
+				break;
+			}
+		} while (opcionMenuPelea==MenuPelea.ATACAR || opcionMenuPelea==MenuPelea.DEFENDER); //no
+	}
+	
+	private static MenuPelea ingresarOpcion(Scanner teclado) {
+		MenuPelea opcionMenuPelea = MenuPelea.ATACAR;
+		int opcion = 0;
 
+		do {
+			opcion = teclado.nextInt();
+			if (opcion>=0 && opcion<MenuPelea.values().length) {
+				opcionMenuPelea = MenuPelea.values()[opcion];
+			} else {
+				System.out.println("Opcion Invalida");
+				mostrarMenuPelea();
+			}
+		} while (opcion < 0 || opcion >= MenuPelea.values().length);
+		
+		return opcionMenuPelea;
+
+	}
+
+	private static void mostrarMenuPelea() {
+		System.out.println(" ");
+		System.out.println("COMBATIENDO...");
+		System.out.println(" ");
+		System.out.println("Ingrese la accion que quiere realizar: ");
+		for (int i = 0; i < MenuPelea.values().length; i++) {
+			MenuPelea opcion = MenuPelea.values()[i];
+			System.out.println((opcion.ordinal() + 1) + ". " + opcion);
+//			System.out.println("Ingrese " + i + " " + MenuPelea.values().length);
 		}
 	}
 

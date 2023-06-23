@@ -2,10 +2,16 @@ package ar.edu.unlam.dominio;
 
 public class Personaje {
 
-	int vida;
-	int energia;
-	int armadura;
-	int arma;
-	int daño;
+	private int vida;
+	private int energia;
+	private int armadura;
+	private int arma;
+	private int daño;
+	
+	public Personaje(int vida, int daño) {
+		this.vida = vida;
+		this.daño = daño;
+		
+	}
 
 }
